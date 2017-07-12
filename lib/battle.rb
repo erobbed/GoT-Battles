@@ -121,4 +121,5 @@ class Battle
    row = self.db.execute(sql_statement).first
    self.new_from_row(row)
   end
+  binding.pry
 end

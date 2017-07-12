@@ -64,7 +64,7 @@ class Army
       #from each row (which is an array), take that specific data as a new collection,
       #and seed that into the rows from csv method for our new table and rows
       if row != nil
-        army_name = [[],row[i]]
+        army_name = [[],row]
         self.rows_from_csv(army_name)
       end
     end
@@ -108,5 +108,4 @@ class Army
    row = self.db.execute(sql_statement).first
    self.new_from_row(row)
   end
-  binding.pry
 end
