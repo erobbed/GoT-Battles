@@ -1,5 +1,6 @@
 require 'pry'
-require_relative 'parser.rb'
+require_relative './parser.rb'
+require_relative './army.rb'
 require "sqlite3"
 
 class Battle
@@ -18,7 +19,7 @@ class Battle
   end
 
   def self.db
-    @@db = SQLite3::Database.new "got_battles.db"
+    @@db = SQLite3::Database.new "../db/got_battles.db"
   end
 
   def self.create_table
@@ -56,6 +57,28 @@ class Battle
   def self.seed_from_csv
   #call self.seed_from_CSV to seed the rows from CSV into the table using #insert method
     @@rows.map do |row|
+      #to create smaller tables from rows we'd need to select individual data elements
+      #from each row (which is an array), take that specific data as a new collection,
+      #and seed that into the rows from csv method for our new table and rows
+      Army.all.each do |army|
+        if army.name == row[5]
+          row[5] = army.id
+        elsif army.name == row[6]
+          row[6] = army.id
+        elsif army.name == row[7]
+          row[7] = army.id
+        elsif army.name == row[8]
+          row[8] = army.id
+        elsif army.name == row[9]
+          row[9] = army.id
+        elsif army.name == row[10]
+          row[10] = army.id
+        elsif army.name == row[11]
+          row[11] = army.id
+        elsif army.name == row[12]
+          row[12] = army.id
+        end
+      end
         self.rows_from_csv(row)
     end
   end
@@ -98,5 +121,4 @@ class Battle
    row = self.db.execute(sql_statement).first
    self.new_from_row(row)
   end
-  binding.pry
 end
